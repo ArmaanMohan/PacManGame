@@ -23,7 +23,7 @@ public class Main {
                 player.moveLeft();
             else if (moveToDo.contentEquals("right"))
                 player.moveRight();
-            System.out.println("Player is at x = " + player.getXCoord() + " and y = " + player.getYCoord());
+            System.out.println("Player: [" + player.getXCoord() + " ," + player.getYCoord()+ "]");
         } while (!moveToDo.contentEquals("end"));
 
 
