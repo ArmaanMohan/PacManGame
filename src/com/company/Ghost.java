@@ -11,12 +11,12 @@ public class Ghost {
 	public String color;
 	
 //Default Constructor (creates a ghost at a random location)
-	public Ghost(){
+	public Ghost(PacMan player){
 		//Getting the coordinates of the board and pacman
 		int lengthOfB = Board.getLength();
 		int heightOfB = Board.getHeight();
-		int pmX = PacMan.getXCoord();
-		int pmY = PacMan.getYCoord();
+		int pmX = player.getXCoord();
+		int pmY = player.getYCoord();
 		
 		//Assigns a random name and color to the ghost
 		Random rand = new Random();
@@ -86,8 +86,7 @@ public class Ghost {
 	
 //Method Setter yCoord
 	public void setYCoord(int yCoord) {
-		if (yCoord >= 0) {
-		this.yCoord = yCoord; }
+		this.yCoord = yCoord;
 	}	
 	
 //Method Setter name
@@ -102,28 +101,22 @@ public class Ghost {
 	
 //Method moveUP
 	public void moveUp(int numCoord) {
-		if ((this.yCoord =- numCoord) >= 0) {
-			this.yCoord =- numCoord; }
+		this.yCoord =- numCoord;
 	}
 	
 //Method moveDown 
 	public void moveDown(int numCoord) {
-		int heightOfB = Board.getHeight();
-		if ((this.yCoord =+ numCoord) <= heightOfB) {
-		this.yCoord =+ numCoord; }
+		this.yCoord =+ numCoord;
 	}
 	
-//Method moveRight (NEED TO CHECK FOR MAX IT CAN GO, DEPENDANT ON SIZE OF BOARD)
+//Method moveRight
 	public void moveRight(int numCoord) {
-		int lengthOfB = Board.getLength();
-		if ((this.xCoord =+ numCoord) <= lengthOfB) {
-		this.xCoord =+ numCoord; }
+		this.xCoord =+ numCoord;
 	}
 	
 //Method moveLeft
 	public void moveLeft(int numCoord) {
-		if ((this.xCoord =- numCoord) >= 0) {
-			this.xCoord =- numCoord; }
+			this.xCoord =- numCoord;
 	}
 
 }
