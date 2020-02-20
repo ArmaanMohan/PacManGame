@@ -54,11 +54,11 @@ public class PacMan {
 	}
 	
 	public void moveUp () {
-		yCoord = yCoord + 1;
+		yCoord = yCoord - 1;
 	}
 	
 	public void moveDown () {
-		yCoord = yCoord - 1;
+		yCoord = yCoord + 1;
 	}
 	
 	public void moveLeft() {
