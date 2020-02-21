@@ -3,7 +3,7 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.lang.Math;
 public class Ghost {
-	
+
 //Instance Variables
 	public int xCoord;
 	public int yCoord;
@@ -11,10 +11,10 @@ public class Ghost {
 	public String color;
 	
 //Default Constructor (creates a ghost at a random location)
-	public Ghost(PacMan player){
+	public Ghost(PacMan player, Board currentBoard){
 		//Getting the coordinates of the board and pacman
-		int lengthOfB = Board.getLength();
-		int heightOfB = Board.getHeight();
+		int lengthOfB = currentBoard.getLength();
+		int heightOfB = currentBoard.getHeight();
 		int pmX = player.getXCoord();
 		int pmY = player.getYCoord();
 		
