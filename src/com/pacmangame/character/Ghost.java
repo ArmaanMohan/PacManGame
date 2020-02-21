@@ -1,7 +1,12 @@
-package com.company;
+package com.pacmangame.character;
+import com.pacmangame.dependencies.ToArray;
+import com.pacmangame.map_elements.Board;
+
+import java.io.IOException;
 import java.util.Random;
 import java.util.ArrayList;
 import java.lang.Math;
+
 public class Ghost {
 
 //Instance Variables
@@ -9,15 +14,25 @@ public class Ghost {
 	public int yCoord;
 	public String name;
 	public String color;
+	public ArrayList<String> names;
+	public ArrayList<String> colors;
+
 	
 //Default Constructor (creates a ghost at a random location)
-	public Ghost(PacMan player, Board currentBoard){
+	public Ghost(PacMan player, Board currentBoard) throws IOException {
 		//Getting the coordinates of the board and pacman
 		int lengthOfB = currentBoard.getLength();
 		int heightOfB = currentBoard.getHeight();
 		int pmX = player.getXCoord();
 		int pmY = player.getYCoord();
-		
+
+		names = new ArrayList();
+		ToArray nameList = new ToArray("src/com/pacmangame/character/GhostNames.txt");
+		names = nameList.getFileAsString();
+		colors = new ArrayList();
+		ToArray colorsList = new ToArray("src/com/pacmangame/character/Colors.txt");
+		colors = colorsList.getFileAsString();
+
 		//Assigns a random name and color to the ghost
 		Random rand = new Random();
 		this.name = names.get(rand.nextInt(names.size()));

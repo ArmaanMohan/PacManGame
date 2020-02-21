@@ -1,4 +1,4 @@
-package com.company;
+package com.pacmangame.map_elements;
 
 // Ashar Siddiqui
 // 02/20/2020

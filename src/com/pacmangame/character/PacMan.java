@@ -1,4 +1,4 @@
-package com.company;
+package com.pacmangame.character;
 
 public class PacMan {
 	
