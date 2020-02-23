@@ -13,7 +13,7 @@ public class PacMan {
 		score = 0;
 		lives = 3;
 	}
-	
+
 	public PacMan(int xCoorGiven, int yCoorGiven) {
 		xCoord = xCoorGiven;
 		yCoord = yCoorGiven;
