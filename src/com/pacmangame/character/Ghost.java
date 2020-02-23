@@ -58,11 +58,22 @@ public class Ghost {
 	}
 	
 //Constructor (initializing instance variables)
-	public Ghost(int xCoord, int yCoord, String name, String color) {
-		if (xCoord >= 0) this.xCoord = xCoord;
-		if (yCoord >= 0) this.yCoord = yCoord;
-		this.name = name;
-		this.color = color;
+	public Ghost(int xCoord, int yCoord) throws IOException {
+		this.xCoord = xCoord;
+		this.yCoord = yCoord;
+
+		names = new ArrayList();
+		ToArray nameList = new ToArray("src/com/pacmangame/character/GhostNames.txt");
+		names = nameList.getFileAsString();
+		colors = new ArrayList();
+		ToArray colorsList = new ToArray("src/com/pacmangame/character/Colors.txt");
+		colors = colorsList.getFileAsString();
+
+		//Assigns a random name and color to the ghost
+		Random rand = new Random();
+		this.name = names.get(rand.nextInt(names.size()));
+		Random rand2 = new Random();
+		this.color = colors.get(rand.nextInt(colors.size()));
 	}
 	
 //Copy constructor
@@ -115,23 +126,23 @@ public class Ghost {
 	}
 	
 //Method moveUP
-	public void moveUp(int numCoord) {
-		this.yCoord =- numCoord;
+	public void moveUp() {
+		this.yCoord =- 1;
 	}
 	
 //Method moveDown 
-	public void moveDown(int numCoord) {
-		this.yCoord =+ numCoord;
+	public void moveDown() {
+		this.yCoord =+ 1;
 	}
 	
 //Method moveRight
-	public void moveRight(int numCoord) {
-		this.xCoord =+ numCoord;
+	public void moveRight() {
+		this.xCoord =+ 1;
 	}
 	
 //Method moveLeft
-	public void moveLeft(int numCoord) {
-			this.xCoord =- numCoord;
+	public void moveLeft() {
+			this.xCoord =- 1;
 	}
 
 }

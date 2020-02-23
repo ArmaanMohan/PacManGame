@@ -16,6 +16,11 @@ public class Board {
 		this.length = length; //make the length of the object "length"
 		this.height = height; //make the width of the object "width"
 	}
+
+	public Board(Board b){
+		this.length = b.length;
+		this.height = b.height;
+	}
 	
 	//Getter that returns the length of the board
 	public int getLength(){

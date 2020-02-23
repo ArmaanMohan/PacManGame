@@ -20,6 +20,13 @@ public class PacMan {
 		score = 0;
 		lives = 0;
 	}
+
+	public PacMan(PacMan p){
+		xCoord = p.xCoord;
+		yCoord = p.yCoord;
+		score = p.score;
+		lives = p.lives;
+	}
 	
 	public void setXCoord (int xCoord) {
 		this.xCoord = xCoord;
