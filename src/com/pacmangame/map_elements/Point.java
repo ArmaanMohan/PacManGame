@@ -8,8 +8,8 @@ package com.pacmangame.map_elements;
 
 public class Point {
 	
-	private int xCoord;
-	private int yCoord;
+	public int xCoord;
+	public int yCoord;
 	
 	//Constructor: Point
 	//This constructor takes two values, xCoord and yCoord, and adds these properties to the current point object based on the arguments entered

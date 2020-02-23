@@ -36,6 +36,7 @@ public class Map {
         this.gameBoard = new Board(b);
         pointList = new ArrayList<>();
         obstacleList = new ArrayList<>();
+        ghostList = new ArrayList<>();
         int[][] pointsCoords = getCoords(pointsFilePath);
         int[][] obstacleCoords = getCoords(obstacleFilePath);
         int[][] ghostCoords = getCoords(ghostsFilePath);
@@ -68,7 +69,6 @@ public class Map {
             lineCounter.nextLine();
             numOfLines++;
         }
-        System.out.println(numOfLines);
         int[][] coords = new int[numOfLines][2];
         String[] coordsAsString = new String[2];
         Scanner fileReader = new Scanner(file);
@@ -77,7 +77,7 @@ public class Map {
             String line = fileReader.nextLine();
             coordsAsString = line.split(",");
             coords[i][0] = Integer.parseInt(coordsAsString[0]);
-            coords[i][1] = Integer.parseInt(coordsAsString[0]);
+            coords[i][1] = Integer.parseInt(coordsAsString[1]);
             i++;
         }
         return coords;

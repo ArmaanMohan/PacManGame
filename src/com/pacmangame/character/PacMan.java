@@ -18,7 +18,7 @@ public class PacMan {
 		xCoord = xCoorGiven;
 		yCoord = yCoorGiven;
 		score = 0;
-		lives = 0;
+		lives = 3;
 	}
 
 	public PacMan(PacMan p){
