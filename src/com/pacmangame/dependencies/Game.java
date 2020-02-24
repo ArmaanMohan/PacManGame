@@ -25,7 +25,7 @@ public class Game {
             String baseFilePath = "src/com/pacmangame/map_elements/Maps/Map1/";
             //Create new board with appropriate dimensions (what we've decided)
             Board mapBoard = new Board(17, 17);
-            //Place the player (pacman) at the centre of the board
+            //Place the player (pacman) at the centre of the board 
             player = new PacMan(8, 8);
             //Create new map (Board with everything on it) with all of the previous data
             currentMap = new Map(mapBoard, baseFilePath + pointsFileName,
