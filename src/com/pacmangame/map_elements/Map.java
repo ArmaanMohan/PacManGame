@@ -9,21 +9,21 @@ import java.util.Scanner;
 
 
 public class Map {
-    public Board getGameBoard() {
+    public Board getGameBoard() { //getter that returns the gameBoard
         return gameBoard;
     }
 
     public Board gameBoard;
 
-    public ArrayList<Point> getPointList() {
+    public ArrayList<Point> getPointList() { //getter that returns the Point list
         return pointList;
     }
 
-    public ArrayList<Obstacle> getObstacleList() {
+    public ArrayList<Obstacle> getObstacleList() { //getter that returns the Obstacle list
         return obstacleList;
     }
 
-    public ArrayList<Ghost> getGhostList() {
+    public ArrayList<Ghost> getGhostList() { //getter that returns the ghost list
         return ghostList;
     }
 
@@ -31,6 +31,8 @@ public class Map {
     public ArrayList<Point> pointList;
     public ArrayList<Obstacle> obstacleList;
 
+    //points, obstacles, and ghosts locations are stored in three separate, 2-dimensional arrays
+    //these coordinates are obtained from a pre-existing text file with coordinates
     public Map(Board b, String pointsFilePath, String obstacleFilePath, String ghostsFilePath)
             throws IOException {
         this.gameBoard = new Board(b);
@@ -41,7 +43,7 @@ public class Map {
         int[][] obstacleCoords = getCoords(obstacleFilePath);
         int[][] ghostCoords = getCoords(ghostsFilePath);
         int i = 0;
-        while (i < pointsCoords.length){
+        while (i < pointsCoords.length){ 
             pointList.add(new Point(pointsCoords[i][0], pointsCoords[i][1]));
             i++;
         }
@@ -60,12 +62,13 @@ public class Map {
     }
 
 
-
+    // this method reads the appropriate text file and creates a 2-dimensional array 
+    // each file has an "x,y" value in each line
     private static int[][] getCoords(String filepath) throws FileNotFoundException {
         File file = new File(filepath);
         Scanner lineCounter = new Scanner(file);
         int numOfLines = 0;
-        while (lineCounter.hasNextLine()){
+        while (lineCounter.hasNextLine()){ //count the number of lines in the file
             lineCounter.nextLine();
             numOfLines++;
         }
@@ -73,14 +76,14 @@ public class Map {
         String[] coordsAsString = new String[2];
         Scanner fileReader = new Scanner(file);
         int i = 0;
-        while (fileReader.hasNextLine()){
+        while (fileReader.hasNextLine()){ //for each line, split the line based on the "," delimiter
             String line = fileReader.nextLine();
             coordsAsString = line.split(",");
-            coords[i][0] = Integer.parseInt(coordsAsString[0]);
-            coords[i][1] = Integer.parseInt(coordsAsString[1]);
+            coords[i][0] = Integer.parseInt(coordsAsString[0]); //for the current line, store the x coordinate in the array
+            coords[i][1] = Integer.parseInt(coordsAsString[1]); //for the current line, store the y coordinate in the array
             i++;
         }
-        return coords;
+        return coords; //return the array
     }
 
 }
