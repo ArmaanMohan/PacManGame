@@ -129,22 +129,22 @@ public class Ghost {
 	
 //Method moveUP
 	public void moveUp() {
-		this.yCoord =- 1;
+		this.yCoord = this.yCoord - 1;
 	}
 	
 //Method moveDown 
 	public void moveDown() {
-		this.yCoord =+ 1;
+		this.yCoord = this.yCoord + 1;
 	}
 	
 //Method moveRight
 	public void moveRight() {
-		this.xCoord =+ 1;
+		this.xCoord = this.xCoord + 1;
 	}
 	
 //Method moveLeft
 	public void moveLeft() {
-			this.xCoord =- 1;
+			this.xCoord = this.xCoord - 1;
 	}
 
 }
