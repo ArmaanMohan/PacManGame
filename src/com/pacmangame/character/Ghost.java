@@ -122,7 +122,7 @@ public class Ghost {
 		this.name = name;
 	}
 	
-//Method Setter color
+//Method Setter color 
 	public void setColour(String colour) {
 		this.color = colour;
 	}

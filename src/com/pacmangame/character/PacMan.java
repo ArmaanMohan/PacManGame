@@ -15,7 +15,7 @@ public class PacMan {
 		score = 0;
 		lives = 3;
 	}
-	// Constructor taking X and Y arguments of pacman location
+	// Constructor taking X and Y arguments of pacman location 
 	public PacMan(int xCoorGiven, int yCoorGiven) {
 		xCoord = xCoorGiven;
 		yCoord = yCoorGiven;

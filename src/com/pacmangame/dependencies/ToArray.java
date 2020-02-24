@@ -22,7 +22,7 @@ public class ToArray {
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line = br.readLine();
 
-            //Add each line of the file to an array
+            //Add each line of the file to an array 
             while (line != null) {
                 fileData.add(line);
                 line = br.readLine();
