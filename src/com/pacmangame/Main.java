@@ -9,9 +9,8 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-	    Game game1 = new Game("EasyMap");
-	    game1.playGame();
-
+	    Game game1 = new Game("EasyMap"); //create a new game object
+	    game1.playGame(); //launch the game by accessing the playGame method in the game class
     }
 
 

@@ -6,8 +6,10 @@ import java.io.FileReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+//Used to load the list of names and colors to randomly choose from
 public class ToArray {
 
+	//Instance  variables
     private static ArrayList fileData;
     static String filepath;
 
@@ -15,15 +17,17 @@ public class ToArray {
         this.filepath = filepath;
         fileData = new ArrayList();
     }
-
+    //Finds and opens the file
     public static ArrayList getFileAsString() throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line = br.readLine();
 
+            //Add each line of the file to an array 
             while (line != null) {
                 fileData.add(line);
                 line = br.readLine();
             }
+            //Creates and returns a copy of the array
             ArrayList fileDataCopy = new ArrayList();
             for (int i = 0; i < fileData.size(); i++) {
                 fileDataCopy.add(fileData.get(i));
