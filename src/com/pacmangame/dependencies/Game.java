@@ -99,7 +99,6 @@ public class Game {
         //location of that point from the list
         for (int i = 0; i < pointsList.size(); i++){
             Point pointToCheck = pointsList.get(i);
-            System.out.println("[" + pointToCheck.getxCoord() + ", " + pointToCheck.getyCoord() + "]");
             if (player.getYCoord() == pointToCheck.getyCoord() &&
                     player.getXCoord() == pointToCheck.getxCoord()){
                 player.addPoint();
