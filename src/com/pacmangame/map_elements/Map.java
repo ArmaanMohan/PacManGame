@@ -42,17 +42,23 @@ public class Map {
         int[][] pointsCoords = getCoords(pointsFilePath);
         int[][] obstacleCoords = getCoords(obstacleFilePath);
         int[][] ghostCoords = getCoords(ghostsFilePath);
+        
         int i = 0;
+        //create a point object and add each row of the 2D list to the newly created object
         while (i < pointsCoords.length){ 
             pointList.add(new Point(pointsCoords[i][0], pointsCoords[i][1]));
             i++;
         }
+        
         i = 0;
+        //create a point object and add each row of the 2D list to the newly created object
         while (i < obstacleCoords.length){
             obstacleList.add(new Obstacle(obstacleCoords[i][0], obstacleCoords[i][1]));
             i++;
         }
+        
         i = 0;
+        //create a point object and add each row of the 2D list to the newly created object
         while (i < ghostCoords.length){
             ghostList.add(new Ghost(ghostCoords[i][0], ghostCoords[i][1]));
             i++;
