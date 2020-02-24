@@ -26,6 +26,7 @@ public class Ghost {
 		int pmX = player.getXCoord();
 		int pmY = player.getYCoord();
 
+		//Assign the file of colors and names to arraylists
 		names = new ArrayList();
 		ToArray nameList = new ToArray("src/com/pacmangame/character/GhostNames.txt");
 		names = nameList.getFileAsString();
@@ -62,6 +63,7 @@ public class Ghost {
 		this.xCoord = xCoord;
 		this.yCoord = yCoord;
 
+		//Assigns the files of colors and names to arraylists
 		names = new ArrayList();
 		ToArray nameList = new ToArray("src/com/pacmangame/character/GhostNames.txt");
 		names = nameList.getFileAsString();
