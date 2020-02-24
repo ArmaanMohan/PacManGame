@@ -42,7 +42,7 @@ public class Game {
         gottenPoints = new ArrayList<>();
     }
 
-    public static void playGame(){
+    public static void playGame() {
         String desiredMove;
         desiredMove = promptUser();
         movePacMan(player, desiredMove);
@@ -56,15 +56,14 @@ public class Game {
         }
 
 
-
     }
 
-    public static String promptUser(){
+    public static String promptUser() {
         String userChosenMove;
         Scanner userMove = new Scanner(System.in);
         System.out.println("Enter your desired move for PacMan: ");
         userChosenMove = userMove.nextLine().toLowerCase();
-        while(!isValidMove(userChosenMove)){
+        while (!isValidMove(userChosenMove)) {
             System.out.println("That wasn't a valid move please try again");
             System.out.println("Enter your desired move for PacMan: ");
             userChosenMove = userMove.nextLine();
@@ -73,18 +72,17 @@ public class Game {
 
     }
 
-    public static void update(){
-        for (Ghost ghost : ghostList){
-            if (player.getXCoord() == ghost.getXCoord() && player.getYCoord() == ghost.getYCoord()){
+    public static void update() {
+        for (Ghost ghost : ghostList) {
+            if (player.getXCoord() == ghost.getXCoord() && player.getYCoord() == ghost.getYCoord()) {
                 player.die();
                 System.out.println("You've been killed by " + ghost.getName());
             }
         }
-        for (int i = 0; i < pointsList.size(); i++){
+        for (int i = 0; i < pointsList.size(); i++) {
             Point pointToCheck = pointsList.get(i);
-            System.out.println("[" + pointToCheck.getxCoord() + ", " + pointToCheck.getyCoord() + "]");
             if (player.getYCoord() == pointToCheck.getyCoord() &&
-                    player.getXCoord() == pointToCheck.getxCoord()){
+                    player.getXCoord() == pointToCheck.getxCoord()) {
                 player.addPoint();
                 pointsList.remove(pointToCheck);
             }
@@ -92,43 +90,45 @@ public class Game {
         System.out.println("PacMan is at " + "[" + player.getXCoord() + ", " + player.getYCoord() + "]\n");
         System.out.println("Your score is: " + player.getScore() + "\n");
         System.out.println("You have " + player.getLives() + " lives remaining \n");
-        for (Ghost ghost : ghostList){
+        for (Ghost ghost : ghostList) {
             System.out.println("" + ghost.getName() + " is at " + "[" + ghost.getXCoord() + ", "
                     + ghost.getYCoord() + "]");
         }
 
     }
 
-    public static boolean isValidMove(String desiredMove){
+    public static boolean isValidMove(String desiredMove) {
         PacMan dummyPlayer = new PacMan(player);
         if (!desiredMove.contentEquals("up") && !desiredMove.contentEquals("down") &&
-                !desiredMove.contentEquals("left") && !desiredMove.contentEquals("right")){
-            return false;}
-        else{
+                !desiredMove.contentEquals("left") && !desiredMove.contentEquals("right")) {
+            return false;
+        } else {
             movePacMan(dummyPlayer, desiredMove);
         }
         int playerX = dummyPlayer.getXCoord();
         int playerY = dummyPlayer.getYCoord();
-        if (playerX < 0 || playerX > currentMap.getGameBoard().getLength()){
-            return false;}
+        if (playerX < 0 || playerX > currentMap.getGameBoard().getLength()) {
+            return false;
+        }
         if (playerY < 0 || playerY > currentMap.getGameBoard().getHeight())
             return false;
         ArrayList<Obstacle> obstacleList = currentMap.getObstacleList();
-        for (int i = 0; i < obstacleList.size(); i++){
+        for (int i = 0; i < obstacleList.size(); i++) {
             Obstacle obstacleToCheck = obstacleList.get(i);
-            if (playerX == obstacleToCheck.getxCoord() && playerY == obstacleToCheck.getyCoord()){
-                return false;}
+            if (playerX == obstacleToCheck.getxCoord() && playerY == obstacleToCheck.getyCoord()) {
+                return false;
+            }
         }
         return true;
 
     }
 
-    public static boolean isValidMove(Ghost ghost, String desiredMove){
+    public static boolean isValidMove(Ghost ghost, String desiredMove) {
         Ghost dummyGhost = new Ghost(ghost);
         if (!desiredMove.contentEquals("up") && !desiredMove.contentEquals("down") &&
-                !desiredMove.contentEquals("left") && !desiredMove.contentEquals("right")){
-            return false;}
-        else{
+                !desiredMove.contentEquals("left") && !desiredMove.contentEquals("right")) {
+            return false;
+        } else {
             moveGhost(dummyGhost, desiredMove);
         }
         int ghostX = dummyGhost.getXCoord();
@@ -138,7 +138,7 @@ public class Game {
         if (ghostY < 0 || ghostY > currentMap.getGameBoard().getLength())
             return false;
         ArrayList<Obstacle> obstacleList = currentMap.getObstacleList();
-        for (int i = 0; i < obstacleList.size(); i++){
+        for (int i = 0; i < obstacleList.size(); i++) {
             Obstacle obstacleToCheck = obstacleList.get(i);
             if (ghostX == obstacleToCheck.getxCoord() && ghostY == obstacleToCheck.getyCoord())
                 return false;
@@ -147,7 +147,7 @@ public class Game {
 
     }
 
-    public static void movePacMan(PacMan player, String toMove){
+    public static void movePacMan(PacMan player, String toMove) {
         if (toMove.contentEquals("up"))
             player.moveUp();
         else if (toMove.contentEquals("down"))
@@ -158,7 +158,7 @@ public class Game {
             player.moveRight();
     }
 
-    public static void moveGhost(Ghost ghost, String toMove){
+    public static void moveGhost(Ghost ghost, String toMove) {
         if (toMove.contentEquals("up"))
             ghost.moveUp();
         else if (toMove.contentEquals("down"))
@@ -169,26 +169,24 @@ public class Game {
             ghost.moveRight();
     }
 
-    public static void moveGhosts(){
-        ArrayList<String> possibleMoves = new ArrayList<>();
-        possibleMoves.add("up");
-        possibleMoves.add("down");
-        possibleMoves.add("left");
-        possibleMoves.add("right");
-        ArrayList<Ghost> ghostList = currentMap.getGhostList();
-        for (Ghost ghost: ghostList){
-            if (isValidMove(ghost, "up"))
+    public static void moveGhosts() {
+        int ghostIndex = 0;
+        while (ghostIndex < ghostList.size()) {
+            Ghost ghost = ghostList.get(ghostIndex);
+            if (isValidMove(ghost, "up")) {
+                System.out.println(ghost.getName());
                 moveGhost(ghost, "up");
-            else if (isValidMove(ghost, "down"))
+            } else if (isValidMove(ghost, "down"))
                 moveGhost(ghost, "down");
             else if (isValidMove(ghost, "left"))
                 moveGhost(ghost, "left");
             else
                 moveGhost(ghost, "right");
+            ghostIndex++;
         }
     }
 
-    public static boolean continueGame(){
+    public static boolean continueGame() {
         if (pointsList.size() == 0)
             return false;
         if (player.getLives() <= 0)
