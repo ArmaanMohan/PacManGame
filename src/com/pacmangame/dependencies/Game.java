@@ -5,7 +5,6 @@ import com.pacmangame.map_elements.*;
 import java.util.Scanner;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Game {
 	//Instance Variables

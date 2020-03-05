@@ -65,10 +65,10 @@ public class Ghost {
 
 		//Assigns the files of colors and names to arraylists
 		names = new ArrayList();
-		ToArray nameList = new ToArray("src/com/pacmangame/character/GhostNames.txt");
+		ToArray nameList = new ToArray("src/com/pacmangame/character/GhostAssets/GhostNames.txt");
 		names = nameList.getFileAsString();
 		colors = new ArrayList();
-		ToArray colorsList = new ToArray("src/com/pacmangame/character/Colors.txt");
+		ToArray colorsList = new ToArray("src/com/pacmangame/character/GhostAssets/Colors.txt");
 		colors = colorsList.getFileAsString();
 
 		//Assigns a random name and color to the ghost
