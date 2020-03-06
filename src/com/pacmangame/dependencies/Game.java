@@ -89,7 +89,7 @@ public class Game {
     public static void update(){
     	//If any of the ghosts are in the same location as pacman (loses a life)
         for (Ghost ghost : ghostList){
-            if (player.getXCoord() == ghost.getXCoord() && player.getYCoord() == ghost.getYCoord()){
+            if (player.getxCoord() == ghost.getxCoord() && player.getyCoord() == ghost.getyCoord()){
                 player.die();
                 System.out.println("You've been killed by " + ghost.getName());
             }
@@ -98,19 +98,19 @@ public class Game {
         //location of that point from the list
         for (int i = 0; i < pointsList.size(); i++){
             Point pointToCheck = pointsList.get(i);
-            if (player.getYCoord() == pointToCheck.getyCoord() &&
-                    player.getXCoord() == pointToCheck.getxCoord()){
+            if (player.getyCoord() == pointToCheck.getyCoord() &&
+                    player.getxCoord() == pointToCheck.getxCoord()){
                 player.addPoint();
                 pointsList.remove(pointToCheck);
             }
         }
         //Prints to consul all the details, will be taken out when GUI is added
-        System.out.println("PacMan is at " + "[" + player.getXCoord() + ", " + player.getYCoord() + "]\n");
+        System.out.println("PacMan is at " + "[" + player.getxCoord() + ", " + player.getyCoord() + "]\n");
         System.out.println("Your score is: " + player.getScore() + "\n");
         System.out.println("You have " + player.getLives() + " lives remaining \n");
         for (Ghost ghost : ghostList){
-            System.out.println("" + ghost.getName() + " is at " + "[" + ghost.getXCoord() + ", "
-                    + ghost.getYCoord() + "]");
+            System.out.println("" + ghost.getName() + " is at " + "[" + ghost.getxCoord() + ", "
+                    + ghost.getyCoord() + "]");
         }
 
     }
@@ -126,8 +126,8 @@ public class Game {
         else{
             movePacMan(dummyPlayer, desiredMove);
         }
-        int playerX = dummyPlayer.getXCoord();
-        int playerY = dummyPlayer.getYCoord();
+        int playerX = dummyPlayer.getxCoord();
+        int playerY = dummyPlayer.getyCoord();
         // If the new location is outside board boundaries or inside an object, return false
         if (playerX < 0 || playerX > currentMap.getGameBoard().getLength()){
             return false;}
@@ -155,8 +155,8 @@ public class Game {
         else{
             moveGhost(dummyGhost, desiredMove);
         }
-        int ghostX = dummyGhost.getXCoord();
-        int ghostY = dummyGhost.getYCoord();
+        int ghostX = dummyGhost.getxCoord();
+        int ghostY = dummyGhost.getyCoord();
         // If the new location is outside board boundaries or inside an object, return false
         if (ghostX < 0 || ghostX > currentMap.getGameBoard().getLength())
             return false;
