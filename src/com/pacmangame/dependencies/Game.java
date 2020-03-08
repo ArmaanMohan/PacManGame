@@ -2,7 +2,6 @@ package com.pacmangame.dependencies;
 
 import com.pacmangame.character.*;
 import com.pacmangame.map_elements.*;
-import java.util.Scanner;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -13,88 +12,45 @@ public class Game {
     public static ArrayList<Ghost> ghostList;
     public static ArrayList<Point> pointsList;
     public static ArrayList<Obstacle> obstacleList;
-    public static ArrayList<Point> gottenPoints;
+    String baseFilePath = "src/com/pacmangame/map_elements/Maps/";
+    String pointsFileName = "/PointsLocations.txt";
+    String obstaclesFileName = "/ObstacleLocations.txt";
+    String ghostLocationsFileName = "/GhostLocations.txt";
 
     public Game(String selectedMap) throws IOException {
-    	//Right now it is hard coded, locations of obstacles, points, ghosts and map
-        String pointsFileName = "PointsLocations.txt";
-        String obstaclesFileName = "ObstacleLocations.txt";
-        String ghostLocationsFileName = "GhostLocations.txt";
-        if (selectedMap == "Map1") {
-            String baseFilePath = "src/com/pacmangame/map_elements/Maps/Map1/";
-            //Create new board with appropriate dimensions (what we've decided)
-            Board mapBoard = new Board(17, 17);
-            //Place the player (pacman) at the centre of the board 
-            player = new PacMan(8, 8);
-            //Create new map (Board with everything on it) with all of the previous data
-            currentMap = new Map(mapBoard, baseFilePath + pointsFileName,
-                    baseFilePath + obstaclesFileName, baseFilePath + ghostLocationsFileName);
-            //Assigns the arrayLists with the appropriate data, from the new map
-            ghostList = currentMap.getGhostList();
-            pointsList = currentMap.getPointList();
-            obstacleList = currentMap.getObstacleList();
-        }
-        //This next section does essentially the same thing, just with different board, data
-        if (selectedMap == "EasyMap") {
-            String baseFilePath = "src/com/pacmangame/map_elements/Maps/EasyMap/";
-            Board mapBoard = new Board(4, 4);
-            player = new PacMan(2, 2);
-            currentMap = new Map(mapBoard, baseFilePath + pointsFileName,
-                    baseFilePath + obstaclesFileName, baseFilePath + ghostLocationsFileName);
-            ghostList = currentMap.getGhostList();
-            pointsList = currentMap.getPointList();
-            obstacleList = currentMap.getObstacleList();
-        }
-        //Ignore this
-        gottenPoints = new ArrayList<>();
+    	currentMap = new Map(baseFilePath + selectedMap + pointsFileName,
+                baseFilePath + selectedMap + obstaclesFileName,
+                baseFilePath + selectedMap + ghostLocationsFileName);
+    	ToArray dimensionBuilder = new ToArray(baseFilePath + selectedMap + "/Dimensions.txt");
+    	ArrayList<String> dimensions = dimensionBuilder.getFileAsString();
+    	int xDimension = Integer.parseInt(dimensions.get(0));
+        int yDimension = Integer.parseInt(dimensions.get(1));
+        Board gameBoard = new Board(xDimension-1, yDimension-1);
+        currentMap.setGameBoard(gameBoard);
+        ghostList = currentMap.getGhostList();
+        obstacleList = currentMap.getObstacleList();
+        pointsList = currentMap.getPointList();
+        int startingX = (int) (Math.floor(xDimension/2));
+        int startingY = (int) (Math.floor(yDimension/2));
+        player = new PacMan(startingX, startingY);
     }
 
+
     // Does everything to play the game
-    public static void playGame(){
-    	// Get the users move
-        String desiredMove;
-        desiredMove = promptUser();
+    public static void doMove(String desiredMove){
         //Move the pacman and the ghosts
         movePacMan(player, desiredMove);
         moveGhosts();
         update();
-        //Unless the pacman has run into a ghost or obtained all the points, the same steps repeat
-        while (continueGame()) {
-            desiredMove = promptUser();
-            movePacMan(player, desiredMove);
-            moveGhosts();
-            update();
-        }
-
-
-
     }
 
-    //Prompt user for their move of pacman (up, down, right or left)
-    public static String promptUser(){
-        String userChosenMove;
-        Scanner userMove = new Scanner(System.in);
-        System.out.println("Enter your desired move for PacMan: ");
-        userChosenMove = userMove.nextLine().toLowerCase();
-        while(!isValidMove(userChosenMove)){
-            System.out.println("That wasn't a valid move please try again");
-            System.out.println("Enter your desired move for PacMan: ");
-            userChosenMove = userMove.nextLine();
-        }
-        return userChosenMove;
-
-    }
-
-    //Checks to see if any special condition has been met
     public static void update(){
-    	//If any of the ghosts are in the same location as pacman (loses a life)
         for (Ghost ghost : ghostList){
             if (player.getxCoord() == ghost.getxCoord() && player.getyCoord() == ghost.getyCoord()){
                 player.die();
-                System.out.println("You've been killed by " + ghost.getName());
             }
         }
-        //If pacman is in the same location as a point, add a point to score and elliminate the 
+        //If pacman is in the same location as a point, add a point to score and elliminate the
         //location of that point from the list
         for (int i = 0; i < pointsList.size(); i++){
             Point pointToCheck = pointsList.get(i);
@@ -104,16 +60,8 @@ public class Game {
                 pointsList.remove(pointToCheck);
             }
         }
-        //Prints to consul all the details, will be taken out when GUI is added
-        System.out.println("PacMan is at " + "[" + player.getxCoord() + ", " + player.getyCoord() + "]\n");
-        System.out.println("Your score is: " + player.getScore() + "\n");
-        System.out.println("You have " + player.getLives() + " lives remaining \n");
-        for (Ghost ghost : ghostList){
-            System.out.println("" + ghost.getName() + " is at " + "[" + ghost.getxCoord() + ", "
-                    + ghost.getyCoord() + "]");
-        }
-
     }
+
 
     // Checks if the proposed players move is valid, not into an obstacle or board edge
     public static boolean isValidMove(String desiredMove){

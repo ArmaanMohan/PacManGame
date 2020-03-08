@@ -33,9 +33,8 @@ public class Map {
 
     //points, obstacles, and ghosts locations are stored in three separate, 2-dimensional arrays
     //these coordinates are obtained from a pre-existing text file with coordinates
-    public Map(Board b, String pointsFilePath, String obstacleFilePath, String ghostsFilePath)
+    public Map(String pointsFilePath, String obstacleFilePath, String ghostsFilePath)
             throws IOException {
-        this.gameBoard = new Board(b);
         pointList = new ArrayList<>();
         obstacleList = new ArrayList<>();
         ghostList = new ArrayList<>();
@@ -92,4 +91,7 @@ public class Map {
         return coords; //return the array
     }
 
+    public void setGameBoard(Board gameBoard) {
+        this.gameBoard = gameBoard;
+    }
 }
