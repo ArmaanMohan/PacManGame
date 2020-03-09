@@ -52,14 +52,29 @@ public class MainUI extends Application {
                             game.doMove(inLower);
                         }
                         GraphicsContext gc = pmLayer.getGraphicsContext2D();
+                        GraphicsContext gcP = pLayer.getGraphicsContext2D();
                         gc.clearRect( 0, 0, pmLayer.getWidth(), pmLayer.getHeight());
+                        gcP.clearRect( 0,0, pLayer.getWidth(), pLayer.getHeight());
                         Image pman = new Image ("Animations/pacman.jpg");
-                        gc.drawImage(pman, toX(game.player.getxCoord()), toY(game.player.getyCoord()));
+                        Image dot = new Image ("Animations/Dot2.0.jpg");
+
+                        Iterator<Point> pIterator = game.currentMap.getPointList().iterator();
+                        while(pIterator.hasNext()){
+                            Point p = pIterator.next();
+                            double x = toX(p.getxCoord());
+                            double y = toY(p.getyCoord());
+                            System.out.println("place point at " + p.getxCoord()+ "" + p.getyCoord());
+                            gc.drawImage(dot, x + 18, y + 18);
+
+                        gc.drawImage(pman, toX(game.player.getxCoord()) + 15, toY(game.player.getyCoord()) + 15);
+
                         if(!keyInput.contains(code))
                             keyInput.add(code);
                     }
                 }
-        );
+                }
+                );
+
         scene.setOnKeyReleased(
                 new EventHandler<KeyEvent>() {
                     @Override
