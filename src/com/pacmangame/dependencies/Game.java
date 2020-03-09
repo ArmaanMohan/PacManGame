@@ -44,6 +44,7 @@ public class Game {
     // Does everything to play the game
     public void doMove(String desiredMove){
         //Move the pacman and the ghosts
+        System.out.println("We are moving");
         movePacMan(player, desiredMove);
         moveGhosts();
         update();
