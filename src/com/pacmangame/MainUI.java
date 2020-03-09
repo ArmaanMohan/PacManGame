@@ -1,6 +1,7 @@
 package com.pacmangame;
 
 
+import com.pacmangame.character.Ghost;
 import com.pacmangame.dependencies.Game;
 import com.pacmangame.dependencies.MapSelector;
 import com.pacmangame.map_elements.Obstacle;
@@ -22,7 +23,7 @@ import java.util.Iterator;
 
 public class MainUI extends Application {
     private Game game;
-    private Canvas oLayer, pLayer, pmLayer;
+    private Canvas oLayer, pLayer, pmLayer, gLayer;
     ArrayList<String> keyInput = new ArrayList<String>();
 
     public MainUI() {
@@ -48,33 +49,45 @@ public class MainUI extends Application {
                         String code = event.getCode().toString();
                         System.out.println(code + " pressed");
                         String inLower = code.toLowerCase();
-                        if (game.isValidMove(inLower)) {
-                            game.doMove(inLower);
+                        if (game.continueGame()) {
+                            if (game.isValidMove(inLower)) {
+                                game.doMove(inLower);
+                            }
+                            GraphicsContext gc = pmLayer.getGraphicsContext2D();
+                            gc.clearRect(0, 0, pmLayer.getWidth(), pmLayer.getHeight());
+                            Image pman = new Image("Animations/dino.gif", 100, 0, true, false);
+                            Image ghost = new Image("Animations/ghost.png", 100, 0, true, false);
+                            for (Ghost g : game.ghostList) {
+                                gc.drawImage(ghost, toX(g.getxCoord()), toY(g.getyCoord()));
+                            }
+                            gc.drawImage(pman, toX(game.player.getxCoord()), toY(game.player.getyCoord()));
+                            Image dot = new Image ("Animations/Dot2.0.jpg");
+                            gc = pLayer.getGraphicsContext2D();
+                            gc.clearRect(0, 0, pLayer.getWidth(), pLayer.getHeight());
+                            Iterator<Point> pIterator = game.currentMap.getPointList().iterator();
+                            while(pIterator.hasNext()) {
+                                Point p = pIterator.next();
+                                double x = toX(p.getxCoord());
+                                double y = toY(p.getyCoord());
+                                System.out.println("place point at " + p.getxCoord() + "" + p.getyCoord());
+                                gc.drawImage(dot, x + 18, y + 18);
+                            }
+                            if (!keyInput.contains(code))
+                                keyInput.add(code);
                         }
-                        GraphicsContext gc = pmLayer.getGraphicsContext2D();
-                        GraphicsContext gcP = pLayer.getGraphicsContext2D();
-                        gc.clearRect( 0, 0, pmLayer.getWidth(), pmLayer.getHeight());
-                        gcP.clearRect( 0,0, pLayer.getWidth(), pLayer.getHeight());
-                        Image pman = new Image ("Animations/pacman.jpg");
-                        Image dot = new Image ("Animations/Dot2.0.jpg");
-
-                        Iterator<Point> pIterator = game.currentMap.getPointList().iterator();
-                        while(pIterator.hasNext()){
-                            Point p = pIterator.next();
-                            double x = toX(p.getxCoord());
-                            double y = toY(p.getyCoord());
-                            System.out.println("place point at " + p.getxCoord()+ "" + p.getyCoord());
-                            gc.drawImage(dot, x + 18, y + 18);
-
-                        gc.drawImage(pman, toX(game.player.getxCoord()) + 15, toY(game.player.getyCoord()) + 15);
-
-                        if(!keyInput.contains(code))
-                            keyInput.add(code);
+                        else{
+                            GraphicsContext gc = pmLayer.getGraphicsContext2D();
+                            gc.clearRect(0, 0, pmLayer.getWidth(), pmLayer.getHeight());
+                            gc = oLayer.getGraphicsContext2D();
+                            gc.clearRect(0, 0, oLayer.getWidth(), oLayer.getHeight());
+                            gc = pLayer.getGraphicsContext2D();
+                            gc.clearRect(0, 0, pLayer.getWidth(), pLayer.getHeight());
+                            Image gameOver = new Image("Animations/GameOver.jpg");
+                            gc.drawImage(gameOver, 120, 120);
+                        }
                     }
                 }
-                }
-                );
-
+        );
         scene.setOnKeyReleased(
                 new EventHandler<KeyEvent>() {
                     @Override
@@ -94,6 +107,7 @@ public class MainUI extends Application {
         oLayer = new Canvas(320, 320);
         pLayer = new Canvas(320, 320);
         pmLayer = new Canvas(320, 320);
+        gLayer = new Canvas(320,320);
         root.getChildren().add(oLayer);
         root.getChildren().add(pLayer);
         root.getChildren().add(pmLayer);
@@ -124,11 +138,16 @@ public class MainUI extends Application {
             gc.drawImage(dot, x + 18, y + 18);
             //gc.fillOval(x + 5, y + 5, 20, 20);
         }
-        Image pman = new Image ("Animations/pacman.jpg");
+        Image pman = new Image ("Animations/dino.gif",100,0,
+                true,false);
         gc = pmLayer.getGraphicsContext2D();
         gc.drawImage(pman, toX(game.currentMap.getGameBoard().getLength() / 2) + 15,
                 toY(game.currentMap.getGameBoard().getHeight() / 2) + 15);
-
+        Image ghost = new Image("Animations/ghost.png", 100, 0,
+                true, false);
+        for (Ghost g : game.ghostList){
+            gc.drawImage(ghost, toX(g.getxCoord()), toY(g.getyCoord()));
+        }
 
         createHandlers(theScene);
         primaryStage.setScene(theScene);
