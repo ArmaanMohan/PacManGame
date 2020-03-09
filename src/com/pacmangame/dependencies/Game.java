@@ -83,9 +83,9 @@ public class Game {
         int playerX = dummyPlayer.getxCoord();
         int playerY = dummyPlayer.getyCoord();
         // If the new location is outside board boundaries or inside an object, return false
-        if (playerX < 0 || playerX > currentMap.getGameBoard().getLength()){
+        if (playerX < 0 || playerX > currentMap.getGameBoard().getLength() - 1){
             return false;}
-        if (playerY < 0 || playerY > currentMap.getGameBoard().getHeight())
+        if (playerY < 0 || playerY > currentMap.getGameBoard().getHeight() - 1)
             return false;
         ArrayList<Obstacle> obstacleList = currentMap.getObstacleList();
         for (int i = 0; i < obstacleList.size(); i++){
