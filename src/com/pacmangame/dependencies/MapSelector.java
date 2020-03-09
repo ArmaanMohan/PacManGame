@@ -9,7 +9,7 @@ public class MapSelector {
     private ArrayList<String> possibleMaps;
     private String MapsFilePath;
 
-    public MapSelector(String aMapsFilePath) throws IOException {
+    public MapSelector(String aMapsFilePath) {
         MapsFilePath = aMapsFilePath;
         possibleMaps = new ArrayList();
         mapIsSelected = false;
@@ -23,9 +23,16 @@ public class MapSelector {
         }
     }
 
-    private void loadMapList() throws IOException {
-        ToArray mapListReader = new ToArray(MapsFilePath+"MapList.txt");
-        possibleMaps = mapListReader.getFileAsString();
+    private void loadMapList() {
+        try{
+            ToArray mapListReader = new ToArray(MapsFilePath+"MapList.txt");
+            possibleMaps = mapListReader.getFileAsString();
+        }
+        catch (IOException io){
+            System.out.println("Unable to load file: " + io);
+            System.exit(1);
+        }
+
     }
 
     public ArrayList<String> getPossibleMaps() {

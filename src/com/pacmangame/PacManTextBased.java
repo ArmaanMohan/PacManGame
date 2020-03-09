@@ -36,7 +36,7 @@ public class PacManTextBased {
     }
 
 
-    public static String selectMap() throws IOException {
+    public static String selectMap() {
         MapSelector mapSelector = new MapSelector("src/com/pacmangame/map_elements/Maps/");
         String userChosenMap;
         Scanner userMapInput = new Scanner(System.in);
