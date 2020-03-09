@@ -24,11 +24,11 @@ public class Board {
 	
 	//Getter that returns the length of the board
 	public int getLength(){
-		return length;
+		return length + 1;
 	}
 	// Getter that returns the width of the board
 	public int getHeight() {
-		return height;
+		return height + 1;
 	}	
 	
 }
