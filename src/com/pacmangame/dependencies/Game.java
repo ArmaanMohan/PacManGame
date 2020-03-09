@@ -7,23 +7,24 @@ import java.util.ArrayList;
 
 public class Game {
 	//Instance Variables
-    public static PacMan player;
-    public static Map currentMap;
-    public static ArrayList<Ghost> ghostList;
-    public static ArrayList<Point> pointsList;
-    public static ArrayList<Obstacle> obstacleList;
+    public PacMan player;
+    public Map currentMap;
+    public ArrayList<Ghost> ghostList;
+    public ArrayList<Point> pointsList;
+    public ArrayList<Obstacle> obstacleList;
     String baseFilePath = "src/com/pacmangame/map_elements/Maps/";
     String pointsFileName = "/PointsLocations.txt";
     String obstaclesFileName = "/ObstacleLocations.txt";
     String ghostLocationsFileName = "/GhostLocations.txt";
 
-    public Game(String selectedMap) throws IOException {
-    	currentMap = new Map(baseFilePath + selectedMap + pointsFileName,
+    public Game(String selectedMap) {
+    	try{
+    	    currentMap = new Map(baseFilePath + selectedMap + pointsFileName,
                 baseFilePath + selectedMap + obstaclesFileName,
                 baseFilePath + selectedMap + ghostLocationsFileName);
     	ToArray dimensionBuilder = new ToArray(baseFilePath + selectedMap + "/Dimensions.txt");
     	ArrayList<String> dimensions = dimensionBuilder.getFileAsString();
-    	int xDimension = Integer.parseInt(dimensions.get(0));
+        int xDimension = Integer.parseInt(dimensions.get(0));
         int yDimension = Integer.parseInt(dimensions.get(1));
         Board gameBoard = new Board(xDimension-1, yDimension-1);
         currentMap.setGameBoard(gameBoard);
@@ -33,18 +34,22 @@ public class Game {
         int startingX = (int) (Math.floor(xDimension/2));
         int startingY = (int) (Math.floor(yDimension/2));
         player = new PacMan(startingX, startingY);
+    	}
+    	catch (IOException io){
+    	    System.out.println("Unable to load file: " + io);
+    	    System.exit(1);
+        }
+
     }
-
-
     // Does everything to play the game
-    public static void doMove(String desiredMove){
+    public void doMove(String desiredMove){
         //Move the pacman and the ghosts
         movePacMan(player, desiredMove);
         moveGhosts();
         update();
     }
 
-    public static void update(){
+    public void update(){
         for (Ghost ghost : ghostList){
             if (player.getxCoord() == ghost.getxCoord() && player.getyCoord() == ghost.getyCoord()){
                 player.die();
@@ -64,7 +69,7 @@ public class Game {
 
 
     // Checks if the proposed players move is valid, not into an obstacle or board edge
-    public static boolean isValidMove(String desiredMove){
+    public boolean isValidMove(String desiredMove){
     	// Create a copy of the pacman and have it move to the new location
         PacMan dummyPlayer = new PacMan(player);
         //Check to make sure the proposed move is up, down, right or left
@@ -93,7 +98,7 @@ public class Game {
 
     //Checks if the proposed ghosts move is valid, not into an obstacle or board edge 
     //Same as above function except with ghosts
-    public static boolean isValidMove(Ghost ghost, String desiredMove){
+    public boolean isValidMove(Ghost ghost, String desiredMove){
     	//Create a copy of a ghost and have it move to the new location
         Ghost dummyGhost = new Ghost(ghost);
         //Check to make sure the ghosts move is up, down, right or left
@@ -122,7 +127,7 @@ public class Game {
 
     //Moves the pacman the desired direction imputed by the user
     //contentEquals just compares strings as they are objects
-    public static void movePacMan(PacMan player, String toMove){
+    public void movePacMan(PacMan player, String toMove){
         if (toMove.contentEquals("up"))
             player.moveUp();
         else if (toMove.contentEquals("down"))
@@ -134,7 +139,7 @@ public class Game {
     }
 
     //Moves the specific ghost the desired direction (will be random, right now has an order)
-    public static void moveGhost(Ghost ghost, String toMove){
+    public void moveGhost(Ghost ghost, String toMove){
         if (toMove.contentEquals("up"))
             ghost.moveUp();
         else if (toMove.contentEquals("down"))
@@ -147,7 +152,7 @@ public class Game {
 
     //Tries to move all the ghosts in the order: up, down, left and right
     //Will eventually make it random
-    public static void moveGhosts(){
+    public void moveGhosts(){
         ArrayList<String> possibleMoves = new ArrayList<>();
         possibleMoves.add("up");
         possibleMoves.add("down");
@@ -168,7 +173,7 @@ public class Game {
 
     //Checks to see if the game should continue 
     //Game will end if there are no points left or no lives left
-    public static boolean continueGame(){
+    public boolean continueGame(){
         if (pointsList.size() == 0)
             return false;
         if (player.getLives() <= 0)
