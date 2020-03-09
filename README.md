@@ -28,5 +28,5 @@ g) #!/bin/sh
 h) javac */*.java
 
 # Class to Access for Running PacMan
-To run PacMan as the text-based version, access and run the Main class.
-To run the full PacMan game (GUI version), access and run the MainUI class!
+To run PacMan game (text-based version), access and run the PacManTextBased class.
+To run the full PacMan game (GUI version), access and run the MainUI class.
