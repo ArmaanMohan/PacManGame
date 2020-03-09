@@ -3,7 +3,6 @@ package com.pacmangame.dependencies;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 //Used to load the list of names and colors to randomly choose from

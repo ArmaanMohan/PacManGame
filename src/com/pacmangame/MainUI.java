@@ -1,6 +1,8 @@
 package com.pacmangame;
 
+
 import com.pacmangame.dependencies.Game;
+import com.pacmangame.dependencies.MapSelector;
 import com.pacmangame.map_elements.Obstacle;
 import com.pacmangame.map_elements.Point;
 import javafx.application.Application;
@@ -25,7 +27,10 @@ public class MainUI extends Application {
     ArrayList<String> keyInput = new ArrayList<String>();
 
     public MainUI() {
-        game = new Game("EasyMap");
+        MapSelector mapSelector = new MapSelector("src/com/pacmangame/map_elements/Maps/");
+        mapSelector.selectMap("EasyMap");
+        String selectedMap = mapSelector.getSelectedMap();
+        game = new Game(selectedMap);
     }
 
     private double toX(int boardX){
