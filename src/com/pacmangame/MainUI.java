@@ -25,6 +25,8 @@ public class MainUI extends Application {
     private Game game;
     private Canvas oLayer, pLayer, pmLayer, gLayer;
     ArrayList<String> keyInput = new ArrayList<String>();
+    private int WIDTH = 320;
+    private int HEIGHT = 320;
 
     public MainUI() {
         MapSelector mapSelector = new MapSelector("src/com/pacmangame/map_elements/Maps/");
@@ -58,9 +60,9 @@ public class MainUI extends Application {
                             Image pman = new Image("Animations/dino.gif", 100, 0, true, false);
                             Image ghost = new Image("Animations/ghost.png", 100, 0, true, false);
                             for (Ghost g : game.ghostList) {
-                                gc.drawImage(ghost, toX(g.getxCoord()), toY(g.getyCoord()));
+                                gc.drawImage(ghost, toX(g.getxCoord()) -10 , toY(g.getyCoord())-23);
                             }
-                            gc.drawImage(pman, toX(game.player.getxCoord()), toY(game.player.getyCoord()));
+                            gc.drawImage(pman, toX(game.player.getxCoord()) -10, toY(game.player.getyCoord())-23);
                             Image dot = new Image ("Animations/Dot2.0.jpg");
                             gc = pLayer.getGraphicsContext2D();
                             gc.clearRect(0, 0, pLayer.getWidth(), pLayer.getHeight());
@@ -72,6 +74,7 @@ public class MainUI extends Application {
                                 System.out.println("place point at " + p.getxCoord() + "" + p.getyCoord());
                                 gc.drawImage(dot, x + 18, y + 18);
                             }
+                            pmLayer.toFront();
                             if (!keyInput.contains(code))
                                 keyInput.add(code);
                         }
@@ -83,7 +86,10 @@ public class MainUI extends Application {
                             gc = pLayer.getGraphicsContext2D();
                             gc.clearRect(0, 0, pLayer.getWidth(), pLayer.getHeight());
                             Image gameOver = new Image("Animations/GameOver.jpg");
-                            gc.drawImage(gameOver, 120, 120);
+                            if (game.player.getLives() <= 0)
+                                gc.drawImage(gameOver, 120, 120);
+                            else
+                                System.out.print("win!");
                         }
                     }
                 }
@@ -104,10 +110,10 @@ public class MainUI extends Application {
         primaryStage.setTitle("Pacman");
         Group root = new Group();
         Scene theScene = new Scene(root);
-        oLayer = new Canvas(320, 320);
-        pLayer = new Canvas(320, 320);
-        pmLayer = new Canvas(320, 320);
-        gLayer = new Canvas(320,320);
+        oLayer = new Canvas(WIDTH, HEIGHT);
+        pLayer = new Canvas(WIDTH, HEIGHT);
+        pmLayer = new Canvas(WIDTH, HEIGHT);
+        gLayer = new Canvas(WIDTH,HEIGHT);
         root.getChildren().add(oLayer);
         root.getChildren().add(pLayer);
         root.getChildren().add(pmLayer);
@@ -141,12 +147,12 @@ public class MainUI extends Application {
         Image pman = new Image ("Animations/dino.gif",100,0,
                 true,false);
         gc = pmLayer.getGraphicsContext2D();
-        gc.drawImage(pman, toX(game.currentMap.getGameBoard().getLength() / 2) + 15,
-                toY(game.currentMap.getGameBoard().getHeight() / 2) + 15);
+        gc.drawImage(pman, toX(game.currentMap.getGameBoard().getLength() / 2) -10,
+                toY(game.currentMap.getGameBoard().getHeight() / 2) -23);
         Image ghost = new Image("Animations/ghost.png", 100, 0,
                 true, false);
         for (Ghost g : game.ghostList){
-            gc.drawImage(ghost, toX(g.getxCoord()), toY(g.getyCoord()));
+            gc.drawImage(ghost, toX(g.getxCoord()) -10 , toY(g.getyCoord()) - 23);
         }
 
         createHandlers(theScene);
