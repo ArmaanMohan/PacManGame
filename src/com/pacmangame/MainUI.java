@@ -61,6 +61,17 @@ public class MainUI extends Application {
                                 gc.drawImage(ghost, toX(g.getxCoord()), toY(g.getyCoord()));
                             }
                             gc.drawImage(pman, toX(game.player.getxCoord()), toY(game.player.getyCoord()));
+                            Image dot = new Image ("Animations/Dot2.0.jpg");
+                            gc = pLayer.getGraphicsContext2D();
+                            gc.clearRect(0, 0, pLayer.getWidth(), pLayer.getHeight());
+                            Iterator<Point> pIterator = game.currentMap.getPointList().iterator();
+                            while(pIterator.hasNext()) {
+                                Point p = pIterator.next();
+                                double x = toX(p.getxCoord());
+                                double y = toY(p.getyCoord());
+                                System.out.println("place point at " + p.getxCoord() + "" + p.getyCoord());
+                                gc.drawImage(dot, x + 18, y + 18);
+                            }
                             if (!keyInput.contains(code))
                                 keyInput.add(code);
                         }
