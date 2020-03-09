@@ -13,8 +13,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -34,11 +32,11 @@ public class MainUI extends Application {
     }
 
     private double toX(int boardX){
-        return oLayer.getWidth() * boardX / game.currentMap.getGameBoard().getLength();
+        return ((oLayer.getWidth() * (boardX) / game.currentMap.getGameBoard().getLength()) );
     }
 
     private double toY(int boardY){
-        return oLayer.getHeight() * boardY / game.currentMap.getGameBoard().getHeight();
+        return ((oLayer.getHeight() * (boardY) / game.currentMap.getGameBoard().getHeight()) );
     }
 
     private void createHandlers(Scene scene) {
@@ -69,8 +67,8 @@ public class MainUI extends Application {
         primaryStage.setTitle("Pacman");
         Group root = new Group();
         Scene theScene = new Scene(root);
-        oLayer = new Canvas(512, 512);
-        pLayer = new Canvas(512, 512);
+        oLayer = new Canvas(320, 320);
+        pLayer = new Canvas(320, 320);
         root.getChildren().add(oLayer);
         root.getChildren().add(pLayer);
         pLayer.toFront();
@@ -86,9 +84,9 @@ public class MainUI extends Application {
             double y = toY(o.getyCoord());
             System.out.println("place brick at " + x+","+y);
             //gc.drawImage(brick, x, y);
-            gc.fillRoundRect(x + 5,y + 5,30,30,10,10);
+            gc.fillRoundRect(x + 5,y + 5,55,55,10,10);
         }
-
+        Image dot = new Image("Animations/Dot2.0.jpg");
         gc = pLayer.getGraphicsContext2D();
         gc.setFill(Color.ORANGE);
         Iterator<Point> pIterator = game.currentMap.getPointList().iterator();
@@ -96,9 +94,9 @@ public class MainUI extends Application {
             Point p = pIterator.next();
             double x = toX(p.getxCoord());
             double y = toY(p.getyCoord());
-            System.out.println("place point at " + x+","+y);
-            //gc.drawImage(brick, x, y);
-            gc.fillOval(x + 5, y + 5, 20, 20);
+            System.out.println("place point at " + p.getxCoord()+ "" + p.getyCoord());
+            gc.drawImage(dot, x + 18, y + 18);
+            //gc.fillOval(x + 5, y + 5, 20, 20);
         }
         createHandlers(theScene);
         primaryStage.setScene(theScene);
