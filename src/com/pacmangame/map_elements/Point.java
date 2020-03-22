@@ -14,11 +14,14 @@ public class Point {
 	//Constructor: Point
 	//This constructor takes two values, xCoord and yCoord, and adds these properties to the current point object based on the arguments entered
 	
-	Point (int xCoord, int yCoord){
+	public Point (int xCoord, int yCoord){
 		this.xCoord = xCoord; //make the x-coordinate of the point object, xCoord
 		this.yCoord = yCoord; //make the y-coordinate of the point object, yCoord
 	}
-	
+	public Point (Point pToCopy){
+		xCoord = pToCopy.getxCoord();
+		yCoord = pToCopy.getyCoord();
+	}
 	//Getter that returns the x-coordinate of the point
 	public int getxCoord() {
 		return xCoord;

@@ -7,15 +7,15 @@ import java.util.ArrayList;
 
 public class Game {
 	//Instance Variables
-    public PacMan player;
-    public Map currentMap;
-    public ArrayList<Ghost> ghostList;
-    public ArrayList<Point> pointsList;
-    public ArrayList<Obstacle> obstacleList;
-    String baseFilePath = "src/com/pacmangame/map_elements/Maps/";
-    String pointsFileName = "/PointsLocations.txt";
-    String obstaclesFileName = "/ObstacleLocations.txt";
-    String ghostLocationsFileName = "/GhostLocations.txt";
+    private PacMan player;
+    private Map currentMap;
+    private ArrayList<Ghost> ghostList;
+    private ArrayList<Point> pointsList;
+    private ArrayList<Obstacle> obstacleList;
+    protected final String baseFilePath = "src/com/pacmangame/map_elements/Maps/";
+    protected final String pointsFileName = "/PointsLocations.txt";
+    protected final String obstaclesFileName = "/ObstacleLocations.txt";
+    protected final String ghostLocationsFileName = "/GhostLocations.txt";
 
     public Game(String selectedMap) {
     	try{
@@ -182,6 +182,25 @@ public class Game {
         return true;
     }
 
+    public PacMan getPlayer() {
+        return new PacMan(player);
+    }
+
+    public Map getCurrentMap() {
+        return currentMap;
+    }
+
+    public ArrayList<Ghost> getGhostList() {
+        return ghostList;
+    }
+
+    public ArrayList<Point> getPointsList() {
+        return pointsList;
+    }
+
+    public ArrayList<Obstacle> getObstacleList() {
+        return obstacleList;
+    }
 }
 
 
