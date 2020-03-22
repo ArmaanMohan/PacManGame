@@ -10,9 +10,14 @@ public class Obstacle {
 	
 	//Constructor: obstacle
 	//This constructor takes the xCoord and yCoord as arguments to create an obstacle (object)
-	Obstacle(int xCoord, int yCoord){
+	public Obstacle(int xCoord, int yCoord){
 		this.xCoord = xCoord;
 		this.yCoord = yCoord;
+	}
+
+	public Obstacle(Obstacle toCopy){
+		xCoord = toCopy.getxCoord();
+		yCoord = toCopy.getyCoord();
 	}
 	
 	//Getter that returns the x-coordinate of the obstacle

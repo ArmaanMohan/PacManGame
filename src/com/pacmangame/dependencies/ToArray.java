@@ -9,15 +9,15 @@ import java.util.ArrayList;
 public class ToArray {
 
 	//Instance  variables
-    private static ArrayList fileData;
-    static String filepath;
+    private ArrayList fileData;
+    private String filepath;
 
     public ToArray(String filepath) {
         this.filepath = filepath;
         fileData = new ArrayList();
     }
     //Finds and opens the file
-    public static ArrayList getFileAsString() throws IOException {
+    public ArrayList getFileAsString() throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line = br.readLine();
 

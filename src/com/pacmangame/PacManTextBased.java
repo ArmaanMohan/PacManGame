@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class PacManTextBased {
-    public static void main(String [] args) throws IOException {
+    public static void main(String [] args) {
         String selectedMap = selectMap();
         Game game1 = new Game(selectedMap);
         printInfo(game1);
@@ -19,15 +19,15 @@ public class PacManTextBased {
         while (game1.continueGame()) {
             printInfo(game1);
             chosenMove = promptUser(game1);
-            int previousLives = game1.player.getLives();
+            int previousLives = game1.getPlayer().getLives();
             game1.doMove(chosenMove);
-            int afterLives = game1.player.getLives();
+            int afterLives = game1.getPlayer().getLives();
             if (previousLives > afterLives){
                 findKiller(game1);
             }
         }
 
-        if (game1.player.getLives() <= 0)
+        if (game1.getPlayer().getLives() <= 0)
             System.out.println("Game over!");
         else
             System.out.println("Congratulations! You have won!");
@@ -54,11 +54,11 @@ public class PacManTextBased {
     }
 
     public static void printInfo(Game currentGame){
-        System.out.println("Player: " + "[" + currentGame.player.getxCoord() + ", " +
-                currentGame.player.getyCoord() + "]" );
-        System.out.println("Score: " + currentGame.player.getScore());
-        System.out.println("Lives: " + currentGame.player.getLives() + "\n");
-        for (Ghost g: currentGame.ghostList){
+        System.out.println("Player: " + "[" + currentGame.getPlayer().getxCoord() + ", " +
+                currentGame.getPlayer().getyCoord() + "]" );
+        System.out.println("Score: " + currentGame.getPlayer().getScore());
+        System.out.println("Lives: " + currentGame.getPlayer().getLives() + "\n");
+        for (Ghost g: currentGame.getGhostList()){
             System.out.println(g.getName() + " is at [" + g.getxCoord() + ", " + g.getyCoord() + "]");
         }
         System.out.print("\n");
@@ -81,8 +81,8 @@ public class PacManTextBased {
     }
 
     public static void findKiller(Game currentGame){
-        for (Ghost g : currentGame.ghostList){
-            if (g.getxCoord() == currentGame.player.getxCoord() && g.getyCoord() == currentGame.player.getyCoord())
+        for (Ghost g : currentGame.getGhostList()){
+            if (g.getxCoord() == currentGame.getPlayer().getxCoord() && g.getyCoord() == currentGame.getPlayer().getyCoord())
                 System.out.println("You've been killed by " + g.getName());
         }
     }
