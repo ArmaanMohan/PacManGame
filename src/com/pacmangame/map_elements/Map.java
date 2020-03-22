@@ -9,27 +9,44 @@ import java.util.Scanner;
 
 
 public class Map {
+
+    private ArrayList<Ghost> ghostList;
+    private ArrayList<Point> pointList;
+    private ArrayList<Obstacle> obstacleList;
+    private Board gameBoard;
+
     public Board getGameBoard() { //getter that returns the gameBoard
-        return gameBoard;
+        return new Board(gameBoard);
     }
 
-    public Board gameBoard;
-
     public ArrayList<Point> getPointList() { //getter that returns the Point list
-        return pointList;
+        ArrayList<Point> listToReturn = new ArrayList<>();
+        for (Point p : pointList){
+
+            listToReturn.add(new Point(p));
+        }
+        return listToReturn;
     }
 
     public ArrayList<Obstacle> getObstacleList() { //getter that returns the Obstacle list
-        return obstacleList;
+        ArrayList<Obstacle> listToReturn = new ArrayList<>();
+        for (Obstacle o : obstacleList){
+
+            listToReturn.add(new Obstacle(o));
+        }
+        return listToReturn;
     }
 
     public ArrayList<Ghost> getGhostList() { //getter that returns the ghost list
-        return ghostList;
+        ArrayList<Ghost> listToReturn = new ArrayList<>();
+        for (Ghost g : ghostList){
+
+            listToReturn.add(new Ghost(g));
+        }
+        return listToReturn;
     }
 
-    public ArrayList<Ghost> ghostList;
-    public ArrayList<Point> pointList;
-    public ArrayList<Obstacle> obstacleList;
+
 
     //points, obstacles, and ghosts locations are stored in three separate, 2-dimensional arrays
     //these coordinates are obtained from a pre-existing text file with coordinates
@@ -66,6 +83,15 @@ public class Map {
 
     }
 
+    public Map(Map toCopy){
+        gameBoard = toCopy.getGameBoard();
+        ghostList = toCopy.getGhostList();
+        obstacleList = toCopy.getObstacleList();
+        pointList = toCopy.getPointList();
+
+
+    }
+
 
     // this method reads the appropriate text file and creates a 2-dimensional array 
     // each file has an "x,y" value in each line
@@ -92,6 +118,6 @@ public class Map {
     }
 
     public void setGameBoard(Board gameBoard) {
-        this.gameBoard = gameBoard;
+        this.gameBoard = new Board(gameBoard);
     }
 }

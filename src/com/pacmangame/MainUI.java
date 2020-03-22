@@ -34,11 +34,11 @@ public class MainUI extends Application {
     }
 
     private double toX(int boardX){
-        return oLayer.getWidth() * boardX / game.currentMap.getGameBoard().getLength();
+        return oLayer.getWidth() * boardX / game.getCurrentMap().getGameBoard().getLength();
     }
 
     private double toY(int boardY){
-        return oLayer.getHeight() * boardY / game.currentMap.getGameBoard().getHeight();
+        return oLayer.getHeight() * boardY / game.getCurrentMap().getGameBoard().getHeight();
     }
 
     private void createHandlers(Scene scene) {
@@ -79,7 +79,7 @@ public class MainUI extends Application {
         GraphicsContext gc = oLayer.getGraphicsContext2D();
         gc.setStroke(Color.BLUE);
         gc.setLineWidth(5);
-        Iterator<Obstacle> iterator = game.currentMap.getObstacleList().iterator();
+        Iterator<Obstacle> iterator = game.getCurrentMap().getObstacleList().iterator();
         while(iterator.hasNext()){
             Obstacle o = iterator.next();
             double x = toX(o.getxCoord());
@@ -91,7 +91,7 @@ public class MainUI extends Application {
 
         gc = pLayer.getGraphicsContext2D();
         gc.setFill(Color.ORANGE);
-        Iterator<Point> pIterator = game.currentMap.getPointList().iterator();
+        Iterator<Point> pIterator = game.getCurrentMap().getPointList().iterator();
         while(pIterator.hasNext()){
             Point p = pIterator.next();
             double x = toX(p.getxCoord());
