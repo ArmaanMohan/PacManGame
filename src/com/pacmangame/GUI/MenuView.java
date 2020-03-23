@@ -9,31 +9,19 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
-import javafx.scene.paint.Color;
+
 
 
 public class MenuView extends FlowPane {
 
-    //instance variables?
-    Stage window;
-    Scene homeScreen;
-
-
-
     public MenuView() {
 
-
-        //BACKGROUND!!!!!!!!!!!!!!!
-        BackgroundFill backFill = new BackgroundFill(Color.NAVY, CornerRadii.EMPTY, Insets.EMPTY);
-        Background theBack = new Background(backFill);
+        super();
+        this.setStyle("-fx-background-color: navy");
 
         //home screen buttons
         Text welcome = new Text("Welcome to the game!");
@@ -50,7 +38,7 @@ public class MenuView extends FlowPane {
         pickLevel.setTextFill(Color.GOLD);
         Button normalLevel = new Button("Normal");
         Button hardLevel = new Button("Hard");
-        normalLevel.setOnAction(new EventHandler<ActionEvent>() {
+        /*normalLevel.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 final String selectedLevel = "easy";
@@ -63,6 +51,8 @@ public class MenuView extends FlowPane {
             }
         } );
 
+         */
+
         HBox levels = new HBox(5);
         levels.setAlignment(Pos.CENTER);
         levels.getChildren().addAll(normalLevel, hardLevel);
@@ -74,16 +64,11 @@ public class MenuView extends FlowPane {
 
         // Home screen
         VBox homeLayout = new VBox(15);
-        homeLayout.setAlignment(Pos.CENTER);
-        homeLayout.setBackground(theBack);
-        homeLayout.getChildren().addAll(welcome, title, pickLevel, levels, playButton);
-        homeScreen = new Scene(homeLayout, 400, 400);
+        this.setAlignment(Pos.CENTER);
+
+        this.getChildren().addAll(welcome, title, pickLevel, levels, playButton);
 
 
-
-        //set home screen
-        window.setScene(homeScreen);
-        window.show();
 
     }
 
