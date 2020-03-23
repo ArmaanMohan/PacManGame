@@ -1,6 +1,7 @@
 package com.pacmangame;
 
 import com.pacmangame.GUI.GameView;
+import com.pacmangame.GUI.MenuView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,12 +22,14 @@ public class PacManGUI extends Application {
     public void start(Stage window) throws Exception {
         window.setTitle("PacMan");
         BorderPane mainContainer = new BorderPane();
+        MenuView m = new MenuView();
         GameView g = new GameView();
         //Temporary code to see testing for now
         HBox bottomTestButtons = new HBox(10);
         Button menuButton = new Button("Menu screen");
         Button gameButton = new Button("Game screen");
         bottomTestButtons.getChildren().addAll(menuButton, gameButton);
+        menuButton.setOnAction(actionEvent -> mainContainer.setCenter(m));
         gameButton.setOnAction(actionEvent -> mainContainer.setCenter(g));
         Rectangle sideRect = new Rectangle(100,650, Color.WHITE);
         Rectangle sideRect2 = new Rectangle(100,650, Color.WHITE);

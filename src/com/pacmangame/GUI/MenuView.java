@@ -38,7 +38,7 @@ public class MenuView extends FlowPane {
         pickLevel.setTextFill(Color.GOLD);
         Button normalLevel = new Button("Normal");
         Button hardLevel = new Button("Hard");
-        /*normalLevel.setOnAction(new EventHandler<ActionEvent>() {
+        normalLevel.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 final String selectedLevel = "easy";
@@ -51,7 +51,7 @@ public class MenuView extends FlowPane {
             }
         } );
 
-         */
+
 
         HBox levels = new HBox(5);
         levels.setAlignment(Pos.CENTER);
@@ -64,9 +64,11 @@ public class MenuView extends FlowPane {
 
         // Home screen
         VBox homeLayout = new VBox(15);
+        homeLayout.setAlignment(Pos.CENTER);
+        homeLayout.getChildren().addAll(welcome, title, pickLevel, levels, playButton);
         this.setAlignment(Pos.CENTER);
 
-        this.getChildren().addAll(welcome, title, pickLevel, levels, playButton);
+        this.getChildren().addAll(homeLayout);
 
 
 
