@@ -1,7 +1,10 @@
 package com.pacmangame.GUI;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.FlowPane;
-
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -34,28 +37,25 @@ public class MenuView extends FlowPane {
 
 
         //level buttons
+        ArrayList<String> theLevels = new ArrayList<String>();
+        theLevels.add("Easy");
+        theLevels.add("Hard");
+        ObservableList<String> levelOptions = FXCollections.observableArrayList(theLevels);
         Label pickLevel = new Label("Please select your level of difficulty");
         pickLevel.setTextFill(Color.GOLD);
-        Button normalLevel = new Button("Normal");
-        Button hardLevel = new Button("Hard");
-        normalLevel.setOnAction(new EventHandler<ActionEvent>() {
+        ComboBox<String> levelBox = new ComboBox<String>(levelOptions);
+        levelBox.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                final String selectedLevel = "easy";
+
             }
-        } );
-        hardLevel.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                final String selectedLevel = "hard";
-            }
-        } );
+        });
 
 
 
         HBox levels = new HBox(5);
         levels.setAlignment(Pos.CENTER);
-        levels.getChildren().addAll(normalLevel, hardLevel);
+        levels.getChildren().addAll(levelBox);
 
         //play button
 
