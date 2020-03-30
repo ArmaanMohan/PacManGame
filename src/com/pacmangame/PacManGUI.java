@@ -1,6 +1,6 @@
 package com.pacmangame;
 
-import com.pacmangame.GUI.GameView;
+import com.pacmangame.GUI.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
