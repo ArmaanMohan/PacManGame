@@ -21,7 +21,6 @@ import java.util.Iterator;
 
 public class GameView extends Group {
     private Game game;
-    private Controller controller;
     private Canvas oLayer, pLayer, pmLayer, gLayer;
 
     public GameView() {
@@ -29,11 +28,14 @@ public class GameView extends Group {
     }
 
     public GameView(Game g, Scene s, Controller c) {
-        Scene theScene = new Scene(this);
-        oLayer = new Canvas(320, 320);
-        pLayer = new Canvas(320, 320);
-        pmLayer = new Canvas(320, 320);
-        gLayer = new Canvas(320,320);
+        int height = (int) s.getHeight();
+        height *= 0.9;
+        int width = (int) s.getWidth();
+        width *= 0.9;
+        oLayer = new Canvas(width, height);
+        pLayer = new Canvas(width, height);
+        pmLayer = new Canvas(width, height);
+        gLayer = new Canvas(width, height);
         getChildren().add(oLayer);
         getChildren().add(pLayer);
         getChildren().add(pmLayer);
@@ -41,14 +43,15 @@ public class GameView extends Group {
         pLayer.toFront();
 
         game = g;
-        controller = c;
+        System.out.println("GameView created game: " + g);
+        c.registerView(this);
 
         drawObstacle();
         drawGhost();
         drawPoint();
         drawDino();
 
-       // theScene.getOnKeyPressed(controller.getEventHandler());
+       s.setOnKeyPressed(c);
     }
 
     private void drawObstacle(){
@@ -94,6 +97,7 @@ public class GameView extends Group {
     }
 
     public void refresh(){
+        System.out.println("refresh called");
         GraphicsContext gc = pLayer.getGraphicsContext2D();
         gc.clearRect(0, 0, pLayer.getWidth(), pLayer.getHeight());
         drawPoint();

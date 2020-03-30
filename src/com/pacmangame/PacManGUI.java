@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import com.pacmangame.dependencies.Game;
+import com.pacmangame.dependencies.Controller;
 
 public class PacManGUI extends Application {
 
@@ -23,13 +24,14 @@ public class PacManGUI extends Application {
         window.setTitle("PacMan");
         BorderPane mainContainer = new BorderPane();
         Scene scene = new Scene(mainContainer, 1000, 750);
-        GameView g = new GameView(new Game("EasyMap"), scene, null);
+        Game g = new Game("EasyMap");
+        GameView gv = new GameView(g, scene, new Controller(g));
         //Temporary code to see testing for now
         HBox bottomTestButtons = new HBox(10);
         Button menuButton = new Button("Menu screen");
         Button gameButton = new Button("Game screen");
         bottomTestButtons.getChildren().addAll(menuButton, gameButton);
-        gameButton.setOnAction(actionEvent -> mainContainer.setCenter(g));
+        gameButton.setOnAction(actionEvent -> mainContainer.setCenter(gv));
         Rectangle sideRect = new Rectangle(100,650, Color.WHITE);
         Rectangle sideRect2 = new Rectangle(100,650, Color.WHITE);
 
