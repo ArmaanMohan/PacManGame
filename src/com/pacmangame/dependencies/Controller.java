@@ -1,7 +1,7 @@
 package com.pacmangame.dependencies;
 import java.awt.event.KeyListener;
 
-import com.pacmangame.GUI.GameView;
+import com.pacmangame.GUI.*;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
