@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -22,26 +23,19 @@ public class PacManGUI extends Application {
     @Override
     public void start(Stage window) throws Exception {
         window.setTitle("PacMan");
-        BorderPane mainContainer = new BorderPane();
-        Scene scene = new Scene(mainContainer, 1000, 750);
-        Game g = new Game("EasyMap");
-        GameView gv = new GameView(g, scene, new Controller(g));
-        //Temporary code to see testing for now
-        HBox bottomTestButtons = new HBox(10);
-        Button menuButton = new Button("Menu screen");
-        Button gameButton = new Button("Game screen");
-        bottomTestButtons.getChildren().addAll(menuButton, gameButton);
-        gameButton.setOnAction(actionEvent -> mainContainer.setCenter(gv));
-        Rectangle sideRect = new Rectangle(100,650, Color.WHITE);
-        Rectangle sideRect2 = new Rectangle(100,650, Color.WHITE);
-
-
-        mainContainer.setLeft(sideRect);
-        mainContainer.setRight(sideRect2);
-        mainContainer.setBottom(bottomTestButtons);
-        //End of test code
-
-        window.setScene(scene);
+        Game currentGame = new Game("Map1");
+        AnchorPane gamePane = loadGameView(currentGame);
+        Scene gameScene = new Scene(gamePane, 600, 600);
+        Controller c = new Controller(currentGame);
+        gamePane.onKeyPressedProperty();
+        window.setScene(gameScene);
         window.show();
+    }
+
+    private AnchorPane loadGameView(Game currentGame){
+        AnchorPane gamePane = new AnchorPane();
+        GameView currentGameView = new GameView(currentGame, 600, 600);
+        gamePane.getChildren().add(currentGameView);
+        return gamePane;
     }
 }
