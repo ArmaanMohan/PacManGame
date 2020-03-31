@@ -1,6 +1,6 @@
 package com.pacmangame;
 
-import com.pacmangame.GUI.*;
+import com.pacmangame.gui.*;
 import com.pacmangame.dependencies.MapSelector;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -10,7 +10,6 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;

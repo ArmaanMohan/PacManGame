@@ -4,6 +4,7 @@ import com.pacmangame.character.*;
 import com.pacmangame.map_elements.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Game {
 	//Instance Variables
@@ -44,8 +45,10 @@ public class Game {
     // Does everything to play the game
     public void doMove(String desiredMove){
         //Move the pacman and the ghosts
-        System.out.println("We are moving");
-        movePacMan(player, desiredMove);
+        //System.out.println("We are moving");
+        if (isValidMove(desiredMove)) {
+            movePacMan(player, desiredMove);
+        }
         moveGhosts();
         update();
     }
@@ -112,11 +115,10 @@ public class Game {
         int ghostX = dummyGhost.getxCoord();
         int ghostY = dummyGhost.getyCoord();
         // If the new location is outside board boundaries or inside an object, return false
-        if (ghostX < 0 || ghostX > currentMap.getGameBoard().getLength())
+        if (ghostX < 0 || ghostX >= currentMap.getGameBoard().getLength())
             return false;
-        if (ghostY < 0 || ghostY > currentMap.getGameBoard().getLength())
+        if (ghostY < 0 || ghostY >= currentMap.getGameBoard().getHeight())
             return false;
-        ArrayList<Obstacle> obstacleList = currentMap.getObstacleList();
         for (int i = 0; i < obstacleList.size(); i++){
             Obstacle obstacleToCheck = obstacleList.get(i);
             if (ghostX == obstacleToCheck.getxCoord() && ghostY == obstacleToCheck.getyCoord())
@@ -152,23 +154,29 @@ public class Game {
     }
 
     //Tries to move all the ghosts in the order: up, down, left and right
-    //Will eventually make it random
     public void moveGhosts(){
-        ArrayList<String> possibleMoves = new ArrayList<>();
-        possibleMoves.add("up");
-        possibleMoves.add("down");
-        possibleMoves.add("left");
-        possibleMoves.add("right");
-        ArrayList<Ghost> ghostList = currentMap.getGhostList();
+
+        Random r = new Random();
         for (Ghost ghost: ghostList){
-            if (isValidMove(ghost, "up"))
-                moveGhost(ghost, "up");
-            else if (isValidMove(ghost, "down"))
-                moveGhost(ghost, "down");
-            else if (isValidMove(ghost, "left"))
-                moveGhost(ghost, "left");
-            else
-                moveGhost(ghost, "right");
+            ArrayList<String> possibleMoves = new ArrayList<>();
+            possibleMoves.add("up");
+            possibleMoves.add("down");
+            possibleMoves.add("left");
+            possibleMoves.add("right");
+            for (int i = 0; i < possibleMoves.size(); i++){
+                if (isValidMove(ghost, possibleMoves.get(i)) == false){
+                    //System.out.println(possibleMoves.get(i));
+                    possibleMoves.remove(i);
+                    i--;
+                }
+
+
+            }
+            if (possibleMoves.size() > 0){
+                int moveIndex = r.nextInt(possibleMoves.size());
+                String move = possibleMoves.get(moveIndex);
+                this.moveGhost(ghost, move);
+            }
         }
     }
 
