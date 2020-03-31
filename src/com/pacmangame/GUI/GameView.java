@@ -101,9 +101,10 @@ public class GameView extends StackPane {
             int y = p.getyCoord();
             Circle point = new Circle();
             point.setFill(Color.YELLOW);
-            point.setRadius(scale/2);
+            point.setRadius(scale/5);
             pLayer.add(point, x, y);
         }
+        pLayer.setGridLinesVisible(true);
         return pLayer;
     }
 
@@ -124,24 +125,11 @@ public class GameView extends StackPane {
         pmLayer.add(loadDinoImage(), x, y);
         return pmLayer;
     }
-/*
+
     public void refresh(){
-        System.out.println("refresh called");
-        GraphicsContext gc = pLayer.getGraphicsContext2D();
-        gc.clearRect(0, 0, pLayer.getWidth(), pLayer.getHeight());
-        drawPoint();
-
-        gc = pmLayer.getGraphicsContext2D();
-        gc.clearRect(0, 0, pmLayer.getWidth(), pmLayer.getHeight());
-        drawDino();
-
-        gc = gLayer.getGraphicsContext2D();
-        gc.clearRect(0, 0, gLayer.getWidth(), gLayer.getHeight());
-        drawGhost();
-
-        pLayer.toFront();
+        this.getChildren().addAll(drawGLayer(), drawPLayer(), drawPmLayer());
     }
-*/
+
     private ImageView loadDinoImage(){
         Image dinoimg = new Image("com/pacmangame/GUI/Assets/Player.gif");
         ImageView dino = new ImageView(dinoimg);
