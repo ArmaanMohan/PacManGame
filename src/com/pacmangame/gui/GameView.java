@@ -5,21 +5,17 @@ import com.pacmangame.character.PacMan;
 import com.pacmangame.dependencies.Game;
 import com.pacmangame.map_elements.Obstacle;
 import com.pacmangame.map_elements.Point;
-import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-
 import java.util.ArrayList;
 
-import static javafx.geometry.Pos.CENTER;
 
 
 public class GameView extends StackPane {
