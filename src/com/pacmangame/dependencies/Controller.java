@@ -1,10 +1,9 @@
 package com.pacmangame.dependencies;
 
-import com.pacmangame.GUI.*;
+import com.pacmangame.gui.*;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 
 
 public class Controller implements EventHandler<KeyEvent> {

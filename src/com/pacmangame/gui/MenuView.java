@@ -1,18 +1,14 @@
-package com.pacmangame.GUI;
+package com.pacmangame.gui;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.FlowPane;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.FontWeight;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 
@@ -26,7 +22,7 @@ public class MenuView extends FlowPane {
     public MenuView(ObservableList mapList) {
 
         super();
-        this.setStyle("-fx-background-color: navy");
+        this.setStyle("-fx-background-color: #001aab");
 
         //home screen buttons
         Text welcome = new Text("Welcome to the game!");
