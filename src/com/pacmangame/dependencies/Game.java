@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Game {
 	//Instance Variables
     private PacMan player;
-    private Map currentMap;
+    private  Map currentMap;
     private ArrayList<Ghost> ghostList;
     private ArrayList<Point> pointsList;
     private ArrayList<Obstacle> obstacleList;
