@@ -43,10 +43,13 @@ public class PacManGUI extends Application {
                 }
                 else{
                     Game currentGame = new Game(menu.getSelectedMap());
-                    AnchorPane gamePane = loadGameView(currentGame);
+                    AnchorPane gamePane = new AnchorPane();
+                    GameView currentGameView = new GameView(currentGame, 600, 600);
+                    gamePane.getChildren().add(currentGameView);
                     Scene gameScene = new Scene(gamePane, 600, 600);
                     window.setScene(gameScene);
                     Controller c = new Controller(currentGame);
+                    c.registerView(currentGameView);
                     gameScene.addEventHandler(KeyEvent.KEY_PRESSED, c);
                 }
 
@@ -55,11 +58,5 @@ public class PacManGUI extends Application {
 
     }
 
-    private AnchorPane loadGameView(Game currentGame){
-        AnchorPane gamePane = new AnchorPane();
-        GameView currentGameView = new GameView(currentGame, 600, 600);
-        gamePane.getChildren().add(currentGameView);
-        return gamePane;
-    }
 
 }
