@@ -191,7 +191,7 @@ public class Game {
     }
 
     public PacMan getPlayer() {
-        return new PacMan(player);
+        return player;
     }
 
     public Map getCurrentMap() {
