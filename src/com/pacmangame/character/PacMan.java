@@ -26,19 +26,11 @@ public class PacMan extends Character {
 		lives = p.lives;
 	}
 
-	//METHOD setter setScore
-	public void setScore (int score) {
-		this.score = score;
-	}
-	//METHOD setter setLives
-	public void setLives (int lives) {
-		this.lives = lives;
-	}
-	//Method getter getScore
+	//Method getter getScore --> returns current score
 	public int getScore () {
 		return score;
 	}
-	//Method getter getLives
+	//Method getter getLives --> returns the number of lives
 	public int getLives () {
 		return lives;
 	}
