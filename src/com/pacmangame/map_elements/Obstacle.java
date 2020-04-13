@@ -5,6 +5,7 @@ package com.pacmangame.map_elements;
 //Description: takes the xCoord and yCoord as arguments to create an obstacle object. All encapsulated.
 public class Obstacle {
 	
+	//instance variables
 	private int xCoord;
 	private int yCoord;
 	

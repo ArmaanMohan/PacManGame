@@ -8,6 +8,7 @@ package com.pacmangame.map_elements;
 
 public class Point {
 	
+	//instance variables
 	private int xCoord;
 	private int yCoord;
 	
@@ -18,6 +19,8 @@ public class Point {
 		this.xCoord = xCoord; //make the x-coordinate of the point object, xCoord
 		this.yCoord = yCoord; //make the y-coordinate of the point object, yCoord
 	}
+	
+	//Copy constructor for a point
 	public Point (Point pToCopy){
 		xCoord = pToCopy.getxCoord();
 		yCoord = pToCopy.getyCoord();
