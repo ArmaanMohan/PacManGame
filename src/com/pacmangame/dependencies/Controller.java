@@ -1,13 +1,17 @@
 package com.pacmangame.dependencies;
 
-import com.pacmangame.gui.*;
+import com.pacmangame.GUI.*;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 
+// The controller class handles the user input (arrow keys or WASD) and acts as an intermediary
+// between the game and gameview classes.
+ 
 public class Controller implements EventHandler<KeyEvent> {
-
+	
+	//instance variables for game and gameview
     private Game g;
     private GameView gv;
 
