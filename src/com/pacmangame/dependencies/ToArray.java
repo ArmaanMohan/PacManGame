@@ -16,6 +16,12 @@ public class ToArray {
         this.filepath = filepath;
         fileData = new ArrayList();
     }
+
+    /**
+     *
+     * @return fileDataCopy
+     * @throws IOException
+     */
     //Finds and opens the file
     public ArrayList getFileAsString() throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {

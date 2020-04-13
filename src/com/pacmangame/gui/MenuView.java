@@ -22,6 +22,8 @@ public class MenuView extends FlowPane {
     public MenuView(ObservableList mapList) {
 
         super();
+
+        //Setting background to desired blue color
         this.setStyle("-fx-background-color: #001aab");
 
         //home screen buttons

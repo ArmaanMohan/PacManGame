@@ -1,11 +1,9 @@
 package com.pacmangame.character;
 import com.pacmangame.dependencies.ToArray;
-import com.pacmangame.map_elements.Board;
-
 import java.io.IOException;
 import java.util.Random;
 import java.util.ArrayList;
-import java.lang.Math;
+
 
 public class Ghost extends Character{
 
@@ -44,21 +42,7 @@ public class Ghost extends Character{
 	public String getName() {
 		return this.name;
 	}
-	
-//Method Getter color
-	public String getColour() {
-		return this.color;	
-	}
-	
-//Method Setter name
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-//Method Setter color 
-	public void setColour(String colour) {
-		this.color = colour;
-	}
+
 
 }
 

@@ -16,7 +16,7 @@ public class GameViewObjectManager {
 
     //Method addObject, adds and object to the arrayList containing the object locations
     public void addObject(CharacterViewLocation object) {
-        System.out.println("GVOMGR.addObject: " + object);
+        //System.out.println("GVOMGR.addObject: " + object);
         objectLocations.add(object);
     }
 

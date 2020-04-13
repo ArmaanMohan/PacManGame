@@ -9,23 +9,39 @@ public class Character {
         this.yCoord = yCoord;
     }
 
+    /**
+     *
+     * @return xCoord;
+     */
     public int getxCoord() {
         return xCoord;
     }
 
+    /**
+     *
+     * @param xCoord
+     */
     public void setxCoord(int xCoord) {
         this.xCoord = xCoord;
     }
 
+    /**
+     *
+     * @return yCoord
+     */
     public int getyCoord() {
         return yCoord;
     }
 
+    /**
+     *
+     * @param yCoord
+     */
     public void setyCoord(int yCoord) {
         this.yCoord = yCoord;
     }
 
-    //Method moveUP
+    //Method to move character up
     public void moveUp() {
         this.yCoord = this.yCoord - 1;
     }
