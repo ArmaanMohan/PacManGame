@@ -24,6 +24,10 @@ public class Controller implements EventHandler<KeyEvent> {
         gv = gmv;
     }
 
+    /**
+     *
+     * @param event
+     */
     public void handle(KeyEvent event) {
 
         //check whether the user has entered a valid key: an arrow key or one of "WASD"
