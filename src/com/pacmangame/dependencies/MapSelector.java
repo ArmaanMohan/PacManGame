@@ -16,18 +16,24 @@ public class MapSelector {
         loadMapList();
     }
 
+    //Method to set the selectedMap
     public void selectMap(String possibleMap){
+        //Checking if the desired map is valid and if so, sets it as the selected map
         if (possibleMaps.contains(possibleMap)){
-           mapIsSelected = true;
-           selectedMap = possibleMap;
+            mapIsSelected = true;
+            selectedMap = possibleMap;
         }
     }
 
+    //Method to load the possible maps into an ArrayList from the MapList.txt text file
     private void loadMapList() {
         try{
+            //Uses toArray class to read from the file and place into an ArrayList
             ToArray mapListReader = new ToArray(MapsFilePath+"MapList.txt");
             possibleMaps = mapListReader.getFileAsString();
         }
+
+        //Catches an IOException by printing the exception and exiting with error code 1
         catch (IOException io){
             System.out.println("Unable to load file: " + io);
             System.exit(1);
@@ -35,6 +41,7 @@ public class MapSelector {
 
     }
 
+    //Getter for the possibleMaps instance variable
     public ArrayList<String> getPossibleMaps() {
         ArrayList<String> possibleMapsCopy = new ArrayList<>();
         for (String map : possibleMaps){

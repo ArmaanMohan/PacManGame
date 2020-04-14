@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Game {
-	//Instance Variables
+    //Instance Variables
     private PacMan player;
     private  Map currentMap;
     private ArrayList<Ghost> ghostList;
@@ -19,26 +19,41 @@ public class Game {
     protected final String ghostLocationsFileName = "/GhostLocations.txt";
 
     public Game(String selectedMap) {
-    	try{
-    	    currentMap = new Map(baseFilePath + selectedMap + pointsFileName,
-                baseFilePath + selectedMap + obstaclesFileName,
-                baseFilePath + selectedMap + ghostLocationsFileName);
-    	ToArray dimensionBuilder = new ToArray(baseFilePath + selectedMap + "/Dimensions.txt");
-    	ArrayList<String> dimensions = dimensionBuilder.getFileAsString();
-        int xDimension = Integer.parseInt(dimensions.get(0));
-        int yDimension = Integer.parseInt(dimensions.get(1));
-        Board gameBoard = new Board(xDimension-1, yDimension-1);
-        currentMap.setGameBoard(gameBoard);
-        ghostList = currentMap.getGhostList();
-        obstacleList = currentMap.getObstacleList();
-        pointsList = currentMap.getPointList();
-        int startingX = (int) (Math.floor(xDimension/2));
-        int startingY = (int) (Math.floor(yDimension/2));
-        player = new PacMan(startingX, startingY);
-    	}
-    	catch (IOException io){
-    	    System.out.println("Unable to load file: " + io);
-    	    System.exit(1);
+        try{
+            //Creates currentMap based by looking at the files of the selected map's folder
+            currentMap = new Map(baseFilePath + selectedMap + pointsFileName,
+                    baseFilePath + selectedMap + obstaclesFileName,
+                    baseFilePath + selectedMap + ghostLocationsFileName);
+
+            //Getting the dimensions textfile and putting the dimensions in the file into an array using
+            //the ToArray class
+            ToArray dimensionBuilder = new ToArray(baseFilePath + selectedMap + "/Dimensions.txt");
+            ArrayList<String> dimensions = dimensionBuilder.getFileAsString();
+
+            //Converting strings from text file to integers
+            int xDimension = Integer.parseInt(dimensions.get(0));
+            int yDimension = Integer.parseInt(dimensions.get(1));
+
+            //Correcting for 0-based coordinate system
+            Board gameBoard = new Board(xDimension-1, yDimension-1);
+
+            //Setting the current map's board to the gameBoard just created using the dimensions from the text file
+            currentMap.setGameBoard(gameBoard);
+
+            //Getting the ghost list, obstacle list, and points list from the map
+            ghostList = currentMap.getGhostList();
+            obstacleList = currentMap.getObstacleList();
+            pointsList = currentMap.getPointList();
+
+            //Sets starting position of player in the middle of the map
+            int startingX = (int) (Math.floor(xDimension/2));
+            int startingY = (int) (Math.floor(yDimension/2));
+            player = new PacMan(startingX, startingY);
+        }
+        //Catches an IOException by printing the io and exiting using error code 1
+        catch (IOException io){
+            System.out.println("Unable to load file: " + io);
+            System.exit(1);
         }
 
     }
@@ -74,7 +89,7 @@ public class Game {
 
     // Checks if the proposed players move is valid, not into an obstacle or board edge
     public boolean isValidMove(String desiredMove){
-    	// Create a copy of the pacman and have it move to the new location
+        // Create a copy of the pacman and have it move to the new location
         PacMan dummyPlayer = new PacMan(player);
         //Check to make sure the proposed move is up, down, right or left
         if (!desiredMove.contentEquals("up") && !desiredMove.contentEquals("down") &&
@@ -100,10 +115,10 @@ public class Game {
 
     }
 
-    //Checks if the proposed ghosts move is valid, not into an obstacle or board edge 
+    //Checks if the proposed ghosts move is valid, not into an obstacle or board edge
     //Same as above function except with ghosts
     public boolean isValidMove(Ghost ghost, String desiredMove){
-    	//Create a copy of a ghost and have it move to the new location
+        //Create a copy of a ghost and have it move to the new location
         Ghost dummyGhost = new Ghost(ghost);
         //Check to make sure the ghosts move is up, down, right or left
         if (!desiredMove.contentEquals("up") && !desiredMove.contentEquals("down") &&
@@ -158,20 +173,24 @@ public class Game {
 
         Random r = new Random();
         for (Ghost ghost: ghostList){
+
+            //Creating and filling ArrayList with the possible moves
             ArrayList<String> possibleMoves = new ArrayList<>();
             possibleMoves.add("up");
             possibleMoves.add("down");
             possibleMoves.add("left");
             possibleMoves.add("right");
+
+            //Going through the possible moves arrayList and if the move is not valid deleting it from the arrayList
             for (int i = 0; i < possibleMoves.size(); i++){
                 if (isValidMove(ghost, possibleMoves.get(i)) == false){
-                    //System.out.println(possibleMoves.get(i));
                     possibleMoves.remove(i);
                     i--;
                 }
-
-
             }
+
+            //If there is a valid move remaining in the list, randomly choose one move from the list and move a ghost
+            //that way
             if (possibleMoves.size() > 0){
                 int moveIndex = r.nextInt(possibleMoves.size());
                 String move = possibleMoves.get(moveIndex);
